@@ -12,7 +12,6 @@ service "apache2" do
     action [:enable, :start ]
 end
 
-node.default["apache"]["index2.html"]
 execute "mv /etc/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled/000-default.conf.disabled" do
     only_if do
         File.exist?("/etc/apache2/sites-enabled/000-default.conf")
@@ -42,10 +41,9 @@ node["apache"]['sites'].each do |site_name, site_data|
             source "index.html.erb"
             mode "0644"
             variables ({
-                :site_name => site_name,
-                :port => site_data["port"]
+                "site_name" => site_name,
+                "port" => site_data["port"]
             })
-            notifies :reload, "service[apache2]"
         end
 
 end

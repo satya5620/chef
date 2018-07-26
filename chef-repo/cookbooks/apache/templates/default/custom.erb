@@ -1,5 +1,5 @@
 <% if @port != 80 -%>
-  Listen <%= @port -%>
+  Listen <%= @port %>
  <% end -%>
 
 <VirtualHost *:<%= @port %>>
@@ -12,7 +12,7 @@
  </Directory>
 
  <Directory <%= @document_root %>>
-    Options Indexes FollowSymLinks MultiViews
+    OPtions Indexes FollowLinks MultiViews
     AllowOverride None
     Order allow,deny
     allow from all

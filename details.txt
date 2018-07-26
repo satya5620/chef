@@ -1,0 +1,101 @@
+sn8551387
+
+
+This is network file share ip : \\192.168.0.131\
+<ip> 13.127.85.162 
+
+Documents
+
+
+from bootstrap
+
+syntax : knife bootstrap <server-ip> --ssh-user ubuntu --sudo --identity-file <.chef-pem file>  --node-name <some-name>
+example:
+ knife bootstrap 13.127.85.162 --ssh-user ubuntu --sudo --identity-file Paven.pem --node-name satya-ubuntu
+
+
+AWS_detailes
+eruser003@gmail.com
+eruser@2012
+
+knife client list
+knife node list
+knife cookbook upload <cookbook-name>
+
+knife node run_list add node-name"reciepe[apache]"
+
+sysntax :run chef-client
+example : sudo chef-client
+
+
+
+knife node show <node-name>
+
+exerice : set attribute in attributes file
+create the dir under appache cookbook
+vi cookbooks/apache/attributes/default.rb
+
+default["apache"]["indexfile"] = "index.html"
+
+vi cookbooks/apache/files/default/index.html
+<html>
+<body>
+<h1>welcom wortld</h1>
+<h2>thsi is index1.html</h2>
+<p>we configure the tihs reicpe </p>
+</doby>
+</html>
+
+chanege in under cookbooks/apache/reciepe/default.rb
+source node ["apache"]["indexfile"]
+
+examp:
+package "apache2" do
+    action :install
+end
+
+package "apache2" do
+    action [:enable, start]
+end
+
+Cookbook_file "/var/www/html/index.html" do
+    source node ["apache"]["indexfile"]
+    mode "0644"
+end
+
+excute in powershell
+knife cookbook uploade apache
+rub in node
+chef-client
+
+
+Exrice : set attribute in reciepe
+change in under cookbooks/apache/reciepe/default.rb
+package "apache2" do
+    action :install
+end
+
+package "apache2" do
+    action [:enable, start]
+end
+
+node.default["apache"]["indexfile"] = "index2.html"
+Cookbook_file "/var/www/html/index.html" do
+    source node ["apache"]["indexfile"]
+    mode "0644"
+end
+
+vi cookbooks/apache/files/default/index.html
+<html>
+<body>
+<h1>welcom wortld</h1>
+<h2>thsi is index1.html</h2>
+<p>we configure the tihs reicpe </p>
+</doby>
+</html>
+
+excute in powershell
+knife cookbook uploade apache
+run in node
+chef-client
+
